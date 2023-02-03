@@ -34,4 +34,4 @@ jobs:
           context: context
           push: true
           platforms: linux/amd64
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_IMAGENAME:$DOCKERHUB_TAG
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGENAME }}:${{ env.DOCKERHUB_TAG }}
