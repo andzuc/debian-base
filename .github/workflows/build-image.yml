@@ -8,7 +8,7 @@ env:
   DOCKERHUB_TAG: buster-20230109
     
 jobs:
-  build-amd64:
+  build-images:
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
@@ -39,7 +39,7 @@ jobs:
           build-args: |
             VERSION=${{ env.DOCKERHUB_TAG }}
           push: true
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64,linux/386
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGENAME }}:${{ env.DOCKERHUB_TAG }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGENAME }}:latest
