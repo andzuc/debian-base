@@ -46,10 +46,11 @@ jobs:
           context: "{{defaultContext}}:context"
           build-args: |
             VERSION=${{ env.DOCKERHUB_TAG }}
-          push: true
+          push: false
+          load: true
           platforms: linux/amd64,linux/arm64,linux/386
           tags: |
             ghcr.io/andzuc/debian-base:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGENAME }}:${{ env.DOCKERHUB_TAG }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGENAME }}:latest
-            
+      - run: docker push ghcr.io/andzuc/debian-base:latest
