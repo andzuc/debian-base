@@ -32,6 +32,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: context
+          build-args: |
+            "VERSION=${{ env.DOCKERHUB_TAG }}"
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGENAME }}:${{ env.DOCKERHUB_TAG }}
