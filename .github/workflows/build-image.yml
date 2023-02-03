@@ -5,6 +5,7 @@ on:
 
 env:
   DOCKERHUB_IMAGENAME: debian-base
+  DOCKERHUB_TAG: buster-20230109
     
 jobs:
   build-amd64:
@@ -33,4 +34,4 @@ jobs:
           context: context
           push: true
           platforms: linux/amd64
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_IMAGENAME:${{ steps.date.outputs.date }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_IMAGENAME:$DOCKERHUB_TAG

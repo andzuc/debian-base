@@ -1,3 +1,3 @@
-FROM debian:buster-20230109
+FROM debian:${{ env.DOCKERHUB_TAG }}
 LABEL maintainer "Andrea Zuccherelli <andrea@zuccherelli.net>"
 RUN apt-get -y update
