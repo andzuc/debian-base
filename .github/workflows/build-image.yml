@@ -8,7 +8,7 @@ env:
   VERSION: buster-20230109
     
 jobs:
-  build-images:
+  build-image:
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
@@ -49,3 +49,9 @@ jobs:
             ghcr.io/andzuc/${{ env.IMAGENAME }}:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:${{ env.VERSION }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:latest
+      - name: Github action build chain. Cross-repo builds
+        uses: kiegroup/github-action-build-chain@v3.1.4
+        with:
+          definition-file: https://raw.githubusercontent.com/andzuc/build-chain-config/master/debian-build-chain.yaml
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
