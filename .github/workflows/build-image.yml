@@ -36,24 +36,25 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: "{{defaultContext}}:context"
-          build-args: |
-            VERSION=${{ env.VERSION }}
-          push: true
-          platforms: linux/amd64,linux/arm64,linux/386
-          tags: |
-            ghcr.io/andzuc/${{ env.IMAGENAME }}:${{ env.VERSION }}
-            ghcr.io/andzuc/${{ env.IMAGENAME }}:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:${{ env.VERSION }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:latest
+      # - name: Build and push
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: "{{defaultContext}}:context"
+      #     build-args: |
+      #       VERSION=${{ env.VERSION }}
+      #     push: true
+      #     platforms: linux/amd64,linux/arm64,linux/386
+      #     tags: |
+      #       ghcr.io/andzuc/${{ env.IMAGENAME }}:${{ env.VERSION }}
+      #       ghcr.io/andzuc/${{ env.IMAGENAME }}:latest
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:${{ env.VERSION }}
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:latest
       - name: Github action build chain. Cross-repo builds
         uses: kiegroup/github-action-build-chain@v3.1.4
         with:
           definition-file: https://raw.githubusercontent.com/andzuc/build-chain-config/master/debian-build-chain.yaml
           flow-type: full_downstream
+          skip-checkout: true
           logger-level: debug
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
