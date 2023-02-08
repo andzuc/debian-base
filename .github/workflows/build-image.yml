@@ -56,7 +56,7 @@ jobs:
           flow-type: branch
           skip-checkout: true
           skip-parallel-checkout: true
-          skip-execution: true
+          skip-execution: false
           logger-level: debug
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
