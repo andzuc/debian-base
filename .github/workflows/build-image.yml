@@ -53,7 +53,7 @@ jobs:
         uses: kiegroup/github-action-build-chain@v3.1.4
         with:
           definition-file: https://raw.githubusercontent.com/andzuc/build-chain-config/master/debian-build-chain.yaml
-          flow-type: branch
+          flow-type: full_downstream
           skip-checkout: true
           skip-parallel-checkout: true
           skip-execution: false
