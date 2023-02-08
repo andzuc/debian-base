@@ -55,6 +55,8 @@ jobs:
           definition-file: https://raw.githubusercontent.com/andzuc/build-chain-config/master/debian-build-chain.yaml
           flow-type: full_downstream
           skip-checkout: true
+          skip-parallel-checkout: true
+          skip-execution: true
           logger-level: debug
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
