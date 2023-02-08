@@ -6,7 +6,6 @@ on:
 env:
   IMAGENAME: debian-base
   VERSION: buster-20230109
-  REL: 1
     
 jobs:
   build-image:
