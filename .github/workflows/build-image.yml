@@ -53,5 +53,6 @@ jobs:
         uses: kiegroup/github-action-build-chain@v3.1.4
         with:
           definition-file: https://raw.githubusercontent.com/andzuc/build-chain-config/master/debian-build-chain.yaml
+          logger-level: debug
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
