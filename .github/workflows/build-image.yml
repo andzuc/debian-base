@@ -2,14 +2,16 @@ name: build-image
 
 on:
   workflow_dispatch:
-  pull_request:
-    types:
-      - closed
+    inputs:
+      version:
+        description: 'Debian base Docker image tag (https://hub.docker.com/_/debian/tags)'
+        required: true
+        default: 'buster-20230109'
 
 env:
   IMAGENAME: debian-base
-  VERSION: buster-20230109
-    
+  VERSION: ${{ github.event.inputs.version || vars.VERSION }}
+
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -24,8 +26,6 @@ jobs:
         uses: docker/setup-buildx-action@v2
         with:
           driver-opts: env.BUILDKIT_STEP_LOG_MAX_SIZE=10485760
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
       - name: Login to GitHub Container Registry
@@ -52,14 +52,3 @@ jobs:
             ghcr.io/andzuc/${{ env.IMAGENAME }}:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:${{ env.VERSION }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:latest
-      # - name: Github action build chain. Cross-repo builds
-      #   uses: kiegroup/github-action-build-chain@v3.1.4
-      #   with:
-      #     definition-file: https://raw.githubusercontent.com/andzuc/build-chain-config/master/debian-build-chain.yaml
-      #     flow-type: full_downstream
-      #     skip-checkout: true
-      #     skip-parallel-checkout: true
-      #     skip-execution: false
-      #     logger-level: debug
-      #   env:
-      #     GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
