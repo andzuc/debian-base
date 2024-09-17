@@ -41,11 +41,11 @@ jobs:
         with:
           context: "{{defaultContext}}:context"
           build-args: |
-            VERSION=${{ env.VERSION }}.${{ github.run_number }}
+            VERSION=${{ env.VERSION }}
           push: true
           platforms: linux/amd64,linux/arm64,linux/386
           tags: |
-            ghcr.io/andzuc/${{ env.IMAGENAME }}:${{ env.VERSION }}
+            ghcr.io/andzuc/${{ env.IMAGENAME }}:${{ env.VERSION }}.${{ github.run_number }}
             ghcr.io/andzuc/${{ env.IMAGENAME }}:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:${{ env.VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:${{ env.VERSION }}.${{ github.run_number }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGENAME }}:latest
